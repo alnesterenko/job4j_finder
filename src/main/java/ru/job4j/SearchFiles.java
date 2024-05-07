@@ -1,6 +1,5 @@
 package ru.job4j;
 
-import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
@@ -12,8 +11,8 @@ import java.util.function.Predicate;
 import static java.nio.file.FileVisitResult.CONTINUE;
 
 public class SearchFiles extends SimpleFileVisitor<Path> {
-    private Predicate<Path> condition;
-    private List<Path> pathsList = new ArrayList<>();
+    private final Predicate<Path> condition;
+    private final List<Path> pathsList = new ArrayList<>();
 
     public SearchFiles(Predicate<Path> condition) {
         this.condition = condition;
@@ -24,7 +23,7 @@ public class SearchFiles extends SimpleFileVisitor<Path> {
     }
 
     @Override
-    public FileVisitResult visitFile(Path file, BasicFileAttributes attributes)  throws IOException {
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attributes) {
         if (condition.test(file)) {
             pathsList.add(file);
         }
